@@ -1,4 +1,4 @@
-# FBTest
+# Facebook的一些基本操作（网页版）
 这边文章主要讲的是利用 JavaScript SDK 进行Facebook的登录，点赞和分享功能。
 ## 前期准备
 1，注册一次Facebook账号，新建一个应用取到应用id
