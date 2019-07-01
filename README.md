@@ -1,5 +1,4 @@
-# Facebook的一些基本操作（网页版）
-这边文章主要讲的是利用 JavaScript SDK 进行Facebook的登录，点赞和分享功能。
+这篇文章主要讲的是利用 JavaScript SDK 进行Facebook的登录，点赞和分享功能。
 ## 前期准备
 1，注册一次Facebook账号，新建一个应用取到应用id
 
@@ -60,7 +59,7 @@ window.login = function(){
 };
 ```
 #### 二，利用插件配置器
-1，进入[https://developers.facebook.com/docs/facebook-login/web?locale=zh_CN]()，在下面图片所示中进行配置，点击“获取代码”按钮。
+1，进入[站点](https://developers.facebook.com/docs/facebook-login/web?locale=zh_CN)，在下面图片所示中进行配置，点击“获取代码”按钮。
 
 ![](https://user-gold-cdn.xitu.io/2018/12/29/167f9a27f4397f42?w=949&h=466&f=png&s=42705)
 
@@ -136,10 +135,11 @@ window.share = function(){
 };
 ```
 #### 二，利用插件配置器
-1，进入[https://developers.facebook.com/docs/plugins/share-button#configurator]()，在下面图片所示中进行配置，点击“获取代码”按钮。
+1，进入[站点](https://developers.facebook.com/docs/plugins/share-button#configurator)，在下面图片所示中进行配置，点击“获取代码”按钮。
 
 ![](https://user-gold-cdn.xitu.io/2019/1/2/1680e47005071895?w=1001&h=431&f=png&s=30150)
 2，在HTML页面中引进js代码（注意：如果你前面已经引进上述的Facebook的SDK到页面中，下面的js可以不用再次引用）
+其中，href为分享的页面
 
 ```
 <div id="fb-root"></div>
@@ -154,13 +154,14 @@ window.share = function(){
 <div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button_count" data-size="small" data-mobile-iframe="true"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">分享</a></div>
 ```
 #### 三，分享调试
-进入[https://developers.facebook.com/tools/debug/]()，输入上面你分享的地址，可以刷新你更换的信息，如果分享不成功，也可以看到分享不成功的原因。
+进入[站点](https://developers.facebook.com/tools/debug/)，输入上面你分享的地址，可以刷新你更换的信息，如果分享不成功，也可以看到分享不成功的原因。
 ## 点赞
 #### 利用插件配置器
-1，进入[https://developers.facebook.com/docs/plugins/like-button]()，在下面图片所示中进行配置，点击“获取代码”按钮。
+1，进入[站点](https://developers.facebook.com/docs/plugins/like-button)，在下面图片所示中进行配置，点击“获取代码”按钮。
 
 ![](https://user-gold-cdn.xitu.io/2019/1/2/1680e45ecd2549f3?w=983&h=581&f=png&s=52220)
 2，在HTML页面中引进js代码（注意：如果你前面已经引进上述的Facebook的SDK到页面中，下面的js可以不用再次引用）
+其中，data-href为点赞的页面。
 
 ```
 <script>(function(d, s, id) {
@@ -173,6 +174,54 @@ window.share = function(){
 
 <div class="fb-like" data-href="https://developers.facebook.com/docs/plugins/" data-layout="standard" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>
 ```
+#### 注意项
+点赞功能需要在应用中进行申请，申请的条件有页面中需要登录按钮，并且该登录按钮可用。申请通过后，该点赞按钮才会在页面中显示。
 
+## 公共主页插件
+
+通过公共主页插件，您可以在网站上轻松嵌入和推广任何公开的 Facebook 主页。与在 Facebook 上一样，您的访客在网站中即可赞和分享主页。您可以将公共主页插件用于任何不受限制（例如国家/地区或年龄限制）的主页。
+#### 利用插件配置器
+1、进入[站点](https://developers.facebook.com/docs/plugins/page-plugin/)，在下面图片所示中进行配置，点击“获取代码”按钮
+
+![](https://user-gold-cdn.xitu.io/2019/7/1/16bab7f3bb10ed1e?w=829&h=843&f=png&s=232617)
+
+2、在HTML页面中引进js代码（注意：如果你前面已经引进上述的Facebook的SDK到页面中，下面的js可以不用再次引用） 其中，data-href为点赞的页面。
+
+```
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = 'https://connect.facebook.net/zh_CN/sdk.js#xfbml=1&version=v3.2&appId=2145131702440053&autoLogAppEvents=1';
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+<div class="fb-page"
+   id="fb-page"
+   data-href="https://www.facebook.com/sm.99trillion/"
+   data-tabs="timeline"
+   data-width="366"
+   data-height="490"
+   data-small-header="true"
+   data-adapt-container-width="true"
+   data-hide-cover="false"
+   data-show-facepile="false">
+ <blockquote
+    cite="https://www.facebook.com/sm.99trillion/"
+    class="fb-xfbml-parse-ignore"
+  >
+    <a href="https://www.facebook.com/sm.99trillion/">Facebook</a>
+  </blockquote>
+</div>
+
+```
+#### 注意项：
+
+* `blockquote`标签的内容用于分享页未加载出来时的显示
+* 该插件有时无法渲染出来iframe的问题，该插件的sdk渲染iframe还需要去拿到对应hash的sdk，加载流程为：在页面中必须先拿到sdk1，执行sdk1去拿sdk2，sdk2中会触发onload函数再去渲染ifram，如果页面加载速度快的时候，页面已经load完成，但是sdk2中的onload函数还未执行，会导致iframe渲染不了，
+解决方法有：页面加载完成之后自动刷新一次，刷新后加上时间戳，以识别为第二次加载
+ 
 ## 总结
 上述为自己在工作中常用的一些Facebook的功能，在此借个地方做个总结。
+
+github代码点击[这里](https://github.com/wxw1314/FBTest)
